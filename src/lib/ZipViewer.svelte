@@ -41,12 +41,6 @@
   };
 
   const downloadFile = async (entry: FileEntry) => {
-    if (entry.uncompressedSize > MAX_FILE_SIZE) {
-      let maxFileSize = prettyBytes(MAX_FILE_SIZE).toLocaleUpperCase();
-      console.error(`File is too large to extract in browser; maximum file size is ${maxFileSize}`);
-      return;
-    }
-
     const blobWriter = new BlobWriter();
     const entryBlob = await entry.getData(blobWriter);
 
@@ -115,7 +109,6 @@
           <a
             href={getHref(directory)}
             class="group text-source-600 dark:text-source-300 hover:text-inherit cursor-pointer no-underline"
-            tabindex="-1"
           >
             <ChevronRight class="inline-block h-4" />
             <span class="underline group-hover:no-underline">{directory.split("/").pop()}</span>
@@ -133,9 +126,12 @@
           <div class="text-sm text-source-600 dark:text-source-300 shrink-0">
             {fileSize.toLocaleUpperCase()}
             <button
-              class="cursor-pointer bg-source-500 hover:bg-source-600 dark:hover:bg-source-400 text-source-50 hover:text-source-950 dark:hover:text-source-50 px-1 py-1.25 ml-1.5"
-              title="Download {filename}"
+              class="cursor-pointer bg-source-500 hover:bg-source-600 dark:hover:bg-source-400 text-source-50 hover:text-source-950 dark:hover:text-source-50 disabled:bg-transparent disabled:hover:bg-transparent disabled:border disabled:border-source-500 disabled:border-dashed disabled:text-source-500 disabled:hover:text-source-500 disabled:cursor-not-allowed px-1 py-1.25 ml-1.5"
+              title={file.uncompressedSize > MAX_FILE_SIZE
+                ? "Download disabled; file too large"
+                : `Download ${filename}`}
               onclick={() => downloadFile(file)}
+              disabled={file.uncompressedSize > MAX_FILE_SIZE}
             >
               <Download class="inline-block h-4" />
             </button>
