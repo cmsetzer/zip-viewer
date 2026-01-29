@@ -52,8 +52,9 @@
   });
 </script>
 
-<div class="w-full h-full p-4 bg-source-100 dark:bg-source-900 text-lg font-mono">
+<div id="zip-viewer" class="w-full h-full p-4 bg-source-100 dark:bg-source-900 text-lg font-mono">
   <nav
+    id="zip-breadcrumbs"
     class="text-source-600 dark:text-source-300 border-b border-source-300 dark:border-source-600 pb-4"
   >
     <ol class="flex flex-row gap-2">
@@ -89,7 +90,7 @@
       {/each}
     </ol>
   </nav>
-  <div class="pt-2">
+  <div id="zip-contents" class="pt-2">
     <ol>
       {#each zipContents.directories as directory, index}
         {#if index < MAX_DIRECTORIES_LISTED}
