@@ -30,7 +30,7 @@
 
 @layer theme {
   body {
-    @apply bg-source-50 dark:bg-source-950;
+    @apply bg-source-100 dark:bg-source-900;
     @apply text-source-950 dark:text-source-50;
   }
 }
