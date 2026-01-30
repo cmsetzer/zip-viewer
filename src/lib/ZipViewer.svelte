@@ -52,20 +52,20 @@
   });
 </script>
 
-<div id="zip-viewer" class="w-full h-full p-4 bg-source-100 dark:bg-source-900 text-lg font-mono">
+<div id="zip-viewer" class="w-full h-full p-4 text-lg font-mono">
   <nav
     id="zip-breadcrumbs"
-    class="text-source-600 dark:text-source-300 border-b border-source-300 dark:border-source-600 pb-4"
+    class="border-b border-source-300 dark:border-source-600 pb-4"
   >
     <ol class="flex flex-row gap-2">
       <li class="shrink-0">
         {#if breadcrumbs.length > 0}
-          <a href={getHref("")} class="group hover:text-inherit cursor-pointer no-underline">
+          <a href={getHref("")} class="text-source-600 dark:text-source-300 group hover:text-inherit cursor-pointer no-underline">
             <FileArchive class="inline-block h-4" />
             <span class="underline hover:no-underline">{zipFileUrl.pathname.split("/").pop()}</span>
           </a>
         {:else}
-          <span>
+          <span class="text-source-600 dark:text-source-300">
             <FileArchive class="inline-block h-4" />
             {zipFileUrl.pathname.split("/").pop() ?? "root"}
           </span>
@@ -75,13 +75,13 @@
         <li class="flex-nowrap truncate">
           <ChevronRight class="inline-block h-4" />
           {#if breadcrumb === breadcrumbs[breadcrumbs.length - 1]}
-            <span>
+            <span class="text-source-600 dark:text-source-300">
               {breadcrumb}
             </span>
           {:else}
             <a
               href={getHref(breadcrumb)}
-              class="group hover:text-inherit cursor-pointer no-underline"
+              class="text-source-600 dark:text-source-300 group hover:text-inherit cursor-pointer no-underline"
             >
               <span class="underline group-hover:no-underline">{breadcrumb}</span>
             </a>
