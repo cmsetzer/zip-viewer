@@ -69,7 +69,7 @@
   };
 </script>
 
-<div id="zip-viewer" class="w-full h-full p-4 text-lg font-mono">
+<div id="zip-viewer" class="w-full h-full p-4 text-xl font-mono">
   <Breadcrumbs prefix={prefix} getHref={getHref} zipFileUrl={zipFileUrl} />
   <div id="zip-contents" class="pt-2">
     <ol>
@@ -106,11 +106,11 @@
               <span>{filename}</span>
             </div>
             <div class="flex items-center gap-4 shrink-0">
-              <div class="text-sm text-source-600 dark:text-source-300 shrink-0">
+              <div class="text-base text-source-600 dark:text-source-300 shrink-0">
                 {fileSize}
               </div>
               <button
-                class="inline-flex items-center gap-1 rounded border border-source-300 px-2 py-1 text-xs text-source-600 hover:text-inherit hover:border-source-400 dark:border-source-600 dark:text-source-300 dark:hover:border-source-500 disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
+                class="inline-flex items-center gap-1 rounded border border-source-300 px-2 py-1 text-sm text-source-600 hover:text-inherit hover:border-source-400 dark:border-source-600 dark:text-source-300 dark:hover:border-source-500 disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
                 onclick={() => downloadEntry(file)}
                 disabled={downloadingFilenames.has(file.filename)}
               >
