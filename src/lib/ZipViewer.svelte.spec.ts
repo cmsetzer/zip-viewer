@@ -5,7 +5,7 @@ import { render } from "vitest-browser-svelte";
 import ZipViewer from "./ZipViewer.svelte";
 
 describe("ZipViewer", () => {
-  it("should render ZIP viewer canvas element", async () => {
+  it("should render ZIP viewer container element", async () => {
     render(ZipViewer, {
       url:
         "https://data.source.coop/harvard-lil/gov-data/collections/data_gov/baffin-bay-region-narwhal-research-version-1/v1.zip",
