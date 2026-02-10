@@ -2,9 +2,10 @@
   import { onMount } from "svelte";
   import { page } from "$app/state";
   import { type Entry, configure, HttpReader, ZipReader } from "@zip.js/zip.js";
-  import { ChevronRight, File, FileArchive, Folder, Download, Loader } from "@lucide/svelte";
+  import { ChevronRight, File, Folder, Download, Loader } from "@lucide/svelte";
   import prettyBytes from "pretty-bytes";
 
+  import Breadcrumbs from "$lib/Breadcrumbs.svelte";
   import { downloadEntryWithFallback } from "$lib/downloadEntry";
   import { clampPrefix, getPrefixDepth, listZipContents } from "$lib/utilities";
 
@@ -26,9 +27,7 @@
   );
   let downloadingFilenames: Set<string> = $state(new Set());
 
-  let breadcrumbs: string[] = $derived(prefix.length > 0 ? prefix.split("/") : []);
   let zipContents = $derived(listZipContents(entries, prefix, MAX_BROWSE_DEPTH));
-
   let prefixDepth: number = $derived(getPrefixDepth(prefix));
 
   const getHref = (prefix: string): string => {
@@ -71,43 +70,7 @@
 </script>
 
 <div id="zip-viewer" class="w-full h-full p-4 text-lg font-mono">
-  <nav id="zip-breadcrumbs" class="border-b border-source-300 dark:border-source-600 pb-4">
-    <ol class="flex flex-row gap-2">
-      <li class="shrink-0">
-        {#if breadcrumbs.length > 0}
-          <a
-            href={getHref("")}
-            class="text-source-600 dark:text-source-300 group hover:text-inherit cursor-pointer no-underline"
-          >
-            <FileArchive class="inline-block h-4" />
-            <span class="underline hover:no-underline">{zipFileUrl.pathname.split("/").pop()}</span>
-          </a>
-        {:else}
-          <span class="text-source-600 dark:text-source-300">
-            <FileArchive class="inline-block h-4" />
-            {zipFileUrl.pathname.split("/").pop() ?? "root"}
-          </span>
-        {/if}
-      </li>
-      {#each breadcrumbs as breadcrumb}
-        <li class="flex-nowrap truncate">
-          <ChevronRight class="inline-block h-4" />
-          {#if breadcrumb === breadcrumbs[breadcrumbs.length - 1]}
-            <span class="text-source-600 dark:text-source-300">
-              {breadcrumb}
-            </span>
-          {:else}
-            <a
-              href={getHref(breadcrumb)}
-              class="text-source-600 dark:text-source-300 group hover:text-inherit cursor-pointer no-underline"
-            >
-              <span class="underline group-hover:no-underline">{breadcrumb}</span>
-            </a>
-          {/if}
-        </li>
-      {/each}
-    </ol>
-  </nav>
+  <Breadcrumbs prefix={prefix} getHref={getHref} zipFileUrl={zipFileUrl} />
   <div id="zip-contents" class="pt-2">
     <ol>
       {#each zipContents.directories as directory, index}
