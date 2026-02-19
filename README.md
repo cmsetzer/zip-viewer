@@ -1,8 +1,6 @@
 # zip-viewer
 
-A simple web app to display the contents of a remote ZIP file. Maximum allowed file size is 200 MB.
-
-Uses [zip.js](https://gildas-lormeau.github.io/zip.js) to read the file's directory metadata.
+A simple web app to display the contents of a remote ZIP file. Uses [zip.js](https://gildas-lormeau.github.io/zip.js) to read the file's directory metadata.
 
 ## How to use
 
