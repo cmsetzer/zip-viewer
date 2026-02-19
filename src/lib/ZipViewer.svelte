@@ -12,8 +12,8 @@
   let { url }: { url: string } = $props();
 
   const MAX_BROWSE_DEPTH = 10;
-  const MAX_DIRECTORIES_LISTED = 100;
-  const MAX_FILES_LISTED = 100;
+  const MAX_DIRECTORIES_LISTED = 500;
+  const MAX_FILES_LISTED = 500;
 
   configure({ useWebWorkers: true });
 
