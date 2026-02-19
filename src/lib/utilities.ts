@@ -35,7 +35,7 @@ export const listZipContents = (
     } else {
       const filename = remainder.slice(0, slashIndex);
       const filepath = `${prefixCanonical}${filename}`;
-      if (getPrefixDepth(filepath) <= maxDepth + 1) directories.add(filepath);
+      if (getPrefixDepth(filepath) <= maxDepth + 1 && filename.length > 0) directories.add(filepath);
     }
   }
 
