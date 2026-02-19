@@ -1,10 +1,7 @@
 <script lang="ts">
-  import prettyBytes from "pretty-bytes";
   import { onMount } from "svelte";
   import { page } from "$app/state";
   import ZipViewer from "$lib/ZipViewer.svelte";
-
-  const MAX_CONTENT_LENGTH_MB = 200;
 
   let searchParams: URLSearchParams = page.url.searchParams;
   let urlParam: string | null = $state(searchParams.get("url"));
@@ -14,14 +11,6 @@
     const response = await fetch(url, { method: "HEAD" });
     if (!response.ok) {
       errorMessage = `ZIP file URL is not valid: ${url}. Status: ${response.status}.`;
-      console.error(errorMessage);
-      return false;
-    }
-
-    const contentLength = parseInt(response.headers.get("Content-Length") ?? "-1");
-    const maxContentLength = MAX_CONTENT_LENGTH_MB * 1024 * 1024;
-    if (contentLength > maxContentLength) {
-      errorMessage = `ZIP file is too large to display (${prettyBytes(contentLength).toLocaleUpperCase()}).`;
       console.error(errorMessage);
       return false;
     }
